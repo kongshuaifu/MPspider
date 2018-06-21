@@ -4,9 +4,19 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+import time
 
 from scrapy import signals
+from scrapy.http import HtmlResponse
+from logging import getLogger
 
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+
+browser = webdriver.Chrome()
 
 class MpspiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -101,3 +111,37 @@ class MpspiderDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class SearchMiddleware(object):
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        # This method is used by Scrapy to create your spiders.
+        s = cls()
+        crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
+        return s
+
+    def process_request(self, request, spider):
+        if spider.name == "Wxhspider":
+            try:
+                browser.get(request.url)
+                browser.implicitly_wait(3)
+                time.sleep(5)
+                
+
+
+    def spider_opened(self, spider):
+        browser = webdriver.Chrome()
+        browser.get('http://weixin.sogou.com/')
+        elem = browser.find_element_by_xpath('//*[@id="query"]')
+        elem.clear()
+        elem.send_keys("GQ实验室")
+        elem.send_keys(Keys.RETURN)
+
+
+        spider.logger.info('Spider opened: %s' % spider.name)
+
+
+
+
