@@ -45,16 +45,21 @@ COOKIES_ENABLED = False
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+# SPIDER_MIDDLEWARES = {
+#     'MPspider.middlewares.SeleniumMiddleware': 543,
+# }
+
 SPIDER_MIDDLEWARES = {
-    'MPspider.middlewares.SeleniumMiddleware': 543,
+    'MPspider.middlewares.MpspiderAgentMiddleware': 543,
 }
+
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-   'MPspider.middlewares.SeleniumMiddleware': 543,
-   'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#    'MPspider.middlewares.SeleniumMiddleware': 543,
+#    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+# }
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -64,9 +69,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'MPspider.pipelines.MpspiderPipeline': 300,
-}
+# ITEM_PIPELINES = {
+#     'MPspider.pipelines.MpspiderPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -103,9 +108,13 @@ LOAD_IMAGE = False  # 是否下载图片
 WINDOW_HEIGHT = 900  # 浏览器窗口大小
 WINDOW_WIDTH = 900
 
-
 # ----------- 要搜索的微信公众号 -------------
 SEARCH_ITEMS = ['GQ实验室', '中国经济学人']
 
-
-
+# ----------- 设置UserAgent ----------------
+USER_AGENT = [
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12A365   "
+    "MicroMessenger/5.4.1 NetType/WIFI",
+    "Mozilla/5.0 (Linux; U; Android 4.1.2; zh-cn; Chitanda/Akari) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 "
+    "Mobile Safari/534.30 MicroMessenger/6.0.0.58_r884092.501 NetType/WIFI "
+]

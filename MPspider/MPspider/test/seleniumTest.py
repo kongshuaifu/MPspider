@@ -1,3 +1,4 @@
+import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
@@ -15,8 +16,10 @@ if __name__ == '__main__':
     elem.clear()
     elem.send_keys("GQ实验室")
     elem.send_keys(Keys.RETURN)
-    assert "No results found." not in driver.page_source
-    driver.close()
-    wait = WebDriverWait(self.driver, 2)
+    url = driver.current_url
+    r = requests.get(url).status_code
+    print(r)
+
+
 
 
